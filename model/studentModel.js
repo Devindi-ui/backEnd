@@ -13,14 +13,19 @@ const student = {
     },
 
     findById: (id) => {
-        const sql = "SELECT * FROM student WHERE student_id = ?";
+        const sql = "SELECT * FROM student WHERE student_id=?";
         return db.execute(sql,[id]);
     },
 
     update: (student) => {
         const {id, first_name, last_name, email, dob} = student;
-        const sql = "UPDATE student SET first_name=?, last_name=?, email=?, dob=?, WHERE student_id=?";
-        return db.execute(sql, [first_name, last_name, email, dob]);
+        const sql = "UPDATE student SET first_name=?, last_name=?, email=?, dob=? WHERE student_id=?";
+        return db.execute(sql, [first_name, last_name, email, dob, id]);
+    },
+
+    delete: (id) => {
+        const sql = "DELETE FROM student WHERE student_id=?";
+        return db.execute(sql, [id]);
     }
 };
 

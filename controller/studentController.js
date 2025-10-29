@@ -36,6 +36,32 @@ const students = {
         } catch (error) {
             res.status(500).json({message: 'Server Error', error: error.message});
         }
+    },
+
+    updateStudent: async(req, res) => {
+        try {
+            const {first_name, last_name, email, dob} = req.body;
+            const id = req.params.id;
+            const [result] = await student.update({first_name, last_name, email, dob, id});
+            if(result.length === 0){
+                return res.status(404).json({msg:"Student not found"});
+            }
+            res.status(200).json({msg: "Student update successfully"});
+        } catch (error) {
+            res.status(500).json({message: 'Server Error', error: error.message});
+        }
+    },
+
+    deleteStudent: async(req, res) => {
+        try {
+            const [result] =await student.delete(req.params.id);
+            if(result.length === 0){
+                return res.status(404).json({msg: "Student not found"});
+            }
+            res.status(200).json({msg: "Student deleted successfully"});
+        } catch (error) {
+            res.status(500).json({message: 'Server Error', error: error.message});
+        }
     }
 }
 
