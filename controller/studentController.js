@@ -9,7 +9,17 @@ const students = {
             res.status(201).json({msg: 'Student saved successful', data: result})
 
         } catch (error) {
-            res.status(500).json({message: 'Server Error'});
+            res.status(500).json({message: 'Server Error', error: error.message});
+        }
+    },
+
+    getAllStudents: async(req, res) => {
+        try {
+            const [rows] = await student.findAll();
+            res.status(200).json({data:rows});
+            
+        } catch (error) {
+            res.status(500).json({message: 'Server Error', error: error.message});
         }
     }
 }
