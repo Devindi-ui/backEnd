@@ -8,8 +8,19 @@ const student = {
     },
 
     findAll: () => {
-        sql = "SELECT * FROM student ORDER BY first_name";
+        const sql = "SELECT * FROM student ORDER BY first_name";
         return db.execute(sql);
+    },
+
+    findById: (id) => {
+        const sql = "SELECT * FROM student WHERE student_id = ?";
+        return db.execute(sql,[id]);
+    },
+
+    update: (student) => {
+        const {id, first_name, last_name, email, dob} = student;
+        const sql = "UPDATE student SET first_name=?, last_name=?, email=?, dob=?, WHERE student_id=?";
+        return db.execute(sql, [first_name, last_name, email, dob]);
     }
 };
 
