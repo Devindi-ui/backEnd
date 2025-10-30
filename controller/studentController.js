@@ -1,5 +1,5 @@
 const db = require('../db');
-const student = require('../model/studentModel');
+const student = require('../module/student');
 
 const students = {
     createStudent: async(req,res) => {
@@ -43,7 +43,7 @@ const students = {
             const {first_name, last_name, email, dob} = req.body;
             const id = req.params.id;
             const [result] = await student.update({first_name, last_name, email, dob, id});
-            if(result.length === 0){
+            if(result.affectedRows === 0){
                 return res.status(404).json({msg:"Student not found"});
             }
             res.status(200).json({msg: "Student update successfully"});
@@ -54,8 +54,8 @@ const students = {
 
     deleteStudent: async(req, res) => {
         try {
-            const [result] =await student.delete(req.params.id);
-            if(result.length === 0){
+            const [result] = await student.delete(req.params.id);
+            if(result.affectedRows === 0){
                 return res.status(404).json({msg: "Student not found"});
             }
             res.status(200).json({msg: "Student deleted successfully"});
