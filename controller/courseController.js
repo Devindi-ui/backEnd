@@ -35,6 +35,25 @@ const courseController = {
         } catch (error) {
             res.status(500).json({msg: `Internal Server Error: ${error.message}`});
         }
+    },
+
+    updateCourse: async(req,res) => {
+        try {
+            const {course_name, course_code, description, course_fee} = req.body;
+            const id = req.params.id;
+            const [result] = await course.update(
+                {
+                course_id:id, 
+                course_name:course_name,
+                course_code:course_code,
+                description:description,
+                course_fee:course_fee
+                }
+            );
+            res.status(200).json({msg: "Update successfully"})
+        } catch (error) {
+            res.status(500).json({msg: `Internal server error: ${error.message}`});
+        }
     }
 }
 
