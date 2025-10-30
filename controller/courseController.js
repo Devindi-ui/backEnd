@@ -25,7 +25,17 @@ const courseController = {
         }
     },
 
-    
+    getCourseByCode: async (req,res) => {
+        try {
+            const code = req.params.code;
+            const [result] = await course.findByCourseCode(code);
+            console.log(result);
+            res.status(200).json({data:result});
+            
+        } catch (error) {
+            res.status(500).json({msg: `Internal Server Error: ${error.message}`});
+        }
+    }
 }
 
 module.exports = courseController;
