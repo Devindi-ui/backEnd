@@ -10,7 +10,22 @@ const courseController = {
             res.status(500).json({msg: `Internal Server Error: ${error.message}`});
             console.log(error);
         }
-    }
+    },
+
+    getAllCourses: async(req,res) => {
+        try {
+            const [result] = await course.findAll();
+            if(result.length === 0){
+                res.status(404).json({msg:"Courses not found"});
+                return;
+            }
+            res.status(200).json({data:result});
+        } catch (error) {
+            res.status(500).json({msg: `Internal Server error: ${error.message}` });
+        }
+    },
+
+    
 }
 
 module.exports = courseController;
