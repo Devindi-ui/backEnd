@@ -4,7 +4,7 @@ const courseController = {
     createCourse: async(req,res) => {
         try {
             const {course_name, course_code, description, course_fee} = req.body;
-            const [result] = await course.create({course_name, course_code, description, course_fee});
+            const [result] = await course.create({course_name, course_code, description, course_fee, status:1});
             res.status(201).json({msg: 'Course created successfully!'});
         } catch (error) {
             res.status(500).json({msg: `Internal Server Error: ${error.message}`});
@@ -50,7 +50,16 @@ const courseController = {
                 course_fee:course_fee
                 }
             );
-            res.status(200).json({msg: "Update successfully"})
+            res.status(200).json({msg: "Update successfully"});
+        } catch (error) {
+            res.status(500).json({msg: `Internal server error: ${error.message}`});
+        }
+    },
+
+    deleteCourse: async(req,res) => {
+        try {
+            await course.delete(req.params.id);
+            res.status(200).json({msg: 'Delete successfully'});
         } catch (error) {
             res.status(500).json({msg: `Internal server error: ${error.message}`});
         }
