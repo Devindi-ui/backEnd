@@ -28,6 +28,24 @@ const enrollmentController = {
         } catch (error) {
             res.status(500).json({msg: `Internal Server Error: ${error}`});
         }
+    },
+
+    updateEnrollment: async(req,res) => {
+        try {
+            const {student_id, course_id, enrollment_date} = req.body;
+            const [result] = await enrollment.update({
+                id:req.params.id,
+                student_id:student_id,
+                course_id:course_id,
+                enrollment_date:enrollment_date
+            });
+            if(result.affectedRows === 0){
+                return res.status(404).json({msg: "Enrollment not found"});
+            }
+            res.status(200).json({msg:"Enrollment updated!"});
+        } catch (error) {
+            res.status(500).json({msg: `Internal Server Error: ${error.message}`});
+        }
     }
 }
 
