@@ -5,7 +5,9 @@ const students = {
     createStudent: async(req,res) => {
         try {
             const {first_name, last_name, email, dob} = req.body;
-            const [result] = await student.save({first_name, last_name, email, dob});
+            const result = await student.save({first_name, last_name, email, dob,
+                status:1
+            });
             res.status(201).json({msg: 'Student saved successful', data: result})
 
         } catch (error) {
