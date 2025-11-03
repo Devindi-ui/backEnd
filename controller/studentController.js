@@ -40,6 +40,18 @@ const students = {
         }
     },
 
+    getStudentByText: async(req, res) => {
+        try {
+            const [result] = await student.findByText(req.params.text);
+            if(result.length === 0){
+                return res.status(200).json({msg: "Student not found"});
+            }
+            res.status(200).json({data: result});
+        } catch (error) {
+            res.status(500).json({message: 'Server Error', error: error.message});
+        }
+    },
+
     updateStudent: async(req, res) => {
         try {
             const {first_name, last_name, email, dob} = req.body;

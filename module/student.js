@@ -21,6 +21,14 @@ const student = {
         return db.execute(sql,[id]);
     },
 
+    findByText: (input) => {
+        const searchText = `%${input}%`
+        const sql = `SELECT * FROM student WHERE email LIKE ? OR 
+                    first_name LIKE ? OR last_name LIKE ? OR dob LIKE ? 
+                    AND student.status=1`;
+        return db.execute(sql,[searchText,searchText,searchText,searchText]);
+    },
+
     update: (student) => {
         const {id, first_name, last_name, email, dob} = student;
         const sql = "UPDATE student SET first_name=?, last_name=?, email=?, dob=? WHERE student_id=?";
