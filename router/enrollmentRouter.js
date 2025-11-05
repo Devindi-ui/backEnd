@@ -6,6 +6,7 @@ const router = express.Router();
 router.post('/create', enrollment.createEnrollement);
 router.get('/all', enrollment.getAllEnrollments);
 router.put('/update/:id', enrollment.updateEnrollment);
+router.put('/delete/:id', enrollment.deleteEnrollment);
 
 
 module.exports = router;

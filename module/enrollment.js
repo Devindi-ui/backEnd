@@ -23,6 +23,11 @@ const enrollment = {
                     enrollment.course_id=?, enrollment.enrollment_date=?
                     WHERE enrollment_id=?`;
         return db.execute(sql,[student_id,course_id,enrollment_date,id]);
+    },
+
+    delete: (id) => {
+        const sql = `DELETE FROM enrollment WHERE enrollment_id=?`;
+        return db.execute(sql,[id]);
     }
 }
 
