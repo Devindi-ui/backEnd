@@ -7,6 +7,6 @@ router.get('/all', students.getAllStudents);
 router.get('/find/:id', students.getStudentById);
 router.get('/search/:text', students.getStudentByText);
 router.put('/update/:id', students.updateStudent);
-router.delete('/delete/:id', students.deleteStudent);
+router.put('/delete/:id', students.deleteStudent);
 
 module.exports = router;

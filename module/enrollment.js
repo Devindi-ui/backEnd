@@ -8,7 +8,7 @@ const enrollment = {
     },
 
     findAll: async() => {
-        const sql = `SELECT enrollment.enrollment_date , CONCAT(student.first_name,
+        const sql = `SELECT enrollment.enrollment_id , enrollment.enrollment_date , CONCAT(student.first_name,
                     " ",student.last_name) AS full_name , courses.course_code, 
                     courses.course_name,courses.course_fee FROM enrollment INNER JOIN 
                     student ON enrollment.student_id = student.student_id INNER JOIN

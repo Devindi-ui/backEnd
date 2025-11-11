@@ -1,5 +1,6 @@
 const express = require('express');
 require('dotenv').config();
+const cors = require('cors')
 
 const app = express();
 
@@ -8,9 +9,11 @@ const courseRouter = require('./router/courseRouter');
 const enrollmentRouter = require('./router/enrollmentRouter');
 
 app.use(express.json());
+app.use(cors());
+
 app.use('/api/v1/students', studentRouter);
 app.use('/api/v1/courses', courseRouter);
-app.use('/api/v1/enrollment', enrollmentRouter);
+app.use('/api/v1/enrollments', enrollmentRouter);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server started on port ${process.env.PORT}`);
